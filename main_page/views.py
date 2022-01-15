@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import TheUsersForm
 from .models import TheUsers
+import re
 
 
 def home_page(request):
@@ -20,10 +21,11 @@ def form_page(request):
 
     elif request.method == 'POST':
         our_form = TheUsersForm(request.POST)
-        form_name = our_form.data['name'].replace(' ', '')
-        form_surname = our_form.data['surname'].replace(' ', '')
-        result = TheUsers.objects.filter(name=str(form_name).capitalize(), surname=str(form_surname).capitalize())
-        user_dict = {'name': form_name, 'surname': form_surname}
+        
+        user_name = re.sub("[^A-Za-z ]", "", our_form.data['name']).strip()
+        user_surname = re.sub("[^A-Za-z ]", "", our_form.data['surname']).strip()
+        result = TheUsers.objects.filter(name=str(user_name).capitalize(), surname=str(user_surname).capitalize())
+        user_dict = {'name': user_name, 'surname': user_surname}
 
         if our_form.is_valid() and not result:
             our_form.save()

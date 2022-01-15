@@ -5,4 +5,13 @@
 {% endblock %}
 
 {% block content %}
+<div>
+    <form method="POST", action="{% url 'form_page' %}" align="center">
+        {% csrf_token %}
+        {{ data.form.name|safe }} <br>
+        {{ data.form.surname|safe }} <br>
+        <button type="submit" style="height: 30px; width: 70px" > Hello </button>
+        <span>{{ data.error }}</span>
+    </form>
+</div>
 {% endblock %}

@@ -1,0 +1,11 @@
+{% extends "web_pages/wrapper.html" %}
+
+{% block title %} 
+{{Title}}
+{% endblock %}
+
+{% block content %}
+<div>
+    <h3 align='center'>Hello {{ data.name|safe }} {{ data.surname|safe }}!</h3>
+</div>
+{% endblock %}

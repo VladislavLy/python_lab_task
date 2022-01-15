@@ -5,4 +5,10 @@
 {% endblock %}
 
 {% block content %}
+    {% for el in list_of_objects %}
+        <div>
+            <li><h3 align='center'>Name: {{ el.name|safe }}</h3></li>
+            <h3 align='center'>Surname: {{ el.surname|safe }}</h3>
+        </div>
+    {% endfor %}
 {% endblock %}

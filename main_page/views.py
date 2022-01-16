@@ -22,9 +22,9 @@ def form_page(request):
     elif request.method == 'POST':
         our_form = TheUsersForm(request.POST)
         
-        user_name = re.sub("[^A-Za-z ]", "", our_form.data['name']).strip()
-        user_surname = re.sub("[^A-Za-z ]", "", our_form.data['surname']).strip()
-        result = TheUsers.objects.filter(name=str(user_name).capitalize(), surname=str(user_surname).capitalize())
+        user_name = str(re.sub("[^A-Za-z ]", "", our_form.data['name']).strip()).capitalize()
+        user_surname = str(re.sub("[^A-Za-z ]", "", our_form.data['surname']).strip()).capitalize()
+        result = TheUsers.objects.filter(name=user_name, surname=user_surname)
         user_dict = {'name': user_name, 'surname': user_surname}
 
         if our_form.is_valid() and not result:
